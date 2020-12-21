@@ -79,7 +79,7 @@ def replenish_sign_admin(id):
 def sign_in():
     user = User.query.filter_by(username=current_user.username).first()
     form = SignForm()
-    if not user.name:
+    if not (user.name and user.s_class):
         flash("请填写您的班级和真实姓名")
         return redirect(url_for('main.edit_profile'))
     if current_user.can(Permission.WRITE) and form.validate_on_submit():
